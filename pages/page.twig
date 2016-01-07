@@ -1,0 +1,13 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <div class="row page">
+        <div class="col-sm-12">
+            <h3 class="section-title title">{{ page.title }}</h3>
+        </div>
+
+        <div class="col-sm-12">
+            <div>{{ page.content | raw }}</div>
+        </div>
+    </div>
+{% endblock body %}

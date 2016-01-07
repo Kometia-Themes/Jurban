@@ -1,0 +1,20 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-xs-12 col-sm-6 col-lg-4">
+                        {% include '_product.twig' %}
+                    </div>
+                    {{ loop.index % 2 == 0 ? '<div class="clearfix product-cards__clearfix-2"></div>': '' }}
+                    {{ loop.index % 3 == 0 ? '<div class="clearfix product-cards__clearfix-3"></div>': '' }}
+                {% endfor %}
+            </div>
+            <div class="row text-center">
+                {{ paginator|raw }}
+            </div>
+        </div>
+    </div>
+{% endblock body %}

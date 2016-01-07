@@ -1,0 +1,31 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    {% if posts | length > 0 %}
+        <div class="col-sm-12 text-center">
+            <h3 class="section-title title">
+                Tag - {{ tag.title }}
+            </h3>
+        </div>
+
+        <div class="row blog-posts">
+            {% for post in posts %}
+                <div class="col-sm-8">
+                    <a href="/blogs/{{ post.blog.permalink }}/posts/{{ post.permalink }}">
+                        <h4 class="text-uppercase">
+                            {{ post.title }}
+                        </h4>
+                    </a>
+
+                    <p>
+                        {{ post.summary }}
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h4 class="text-uppercase text-center">
+            Lo sentimos, no hay entradas relacionadas al tag.
+        </h4>
+    {% endif %}
+{% endblock body %}
