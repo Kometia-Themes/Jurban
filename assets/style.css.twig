@@ -67,6 +67,7 @@ input[type='search'] {
 /* Global styles */
 /* * * * * * * * */
 
+a.btn,
 .btn {
     border-radius: 0;
     font-weight: 300;
@@ -77,6 +78,7 @@ input[type='search'] {
     background: {{ settings.link_color }};
     color: {{ settings.button_text_color }};
 }
+a:hover.btn,
 .btn:hover {
     background: {{ settings.link_hover_color }};
     color: {{ settings.button_text_color }};
@@ -175,7 +177,7 @@ input.checkbox-control__input[type="checkbox"]:focus + label::before {
 input.checkbox-control__input[type="checkbox"]:checked + label::after {
     font-family: "MaterialDesignIcons";
     content: "\f1fe";
-    color: white;
+    color: #999;
 }
 input.checkbox-control__input[type="checkbox"]:disabled + label {
     opacity: 0.65;
@@ -520,6 +522,7 @@ select.cart__resume-table__product-quantity {
     font-size: 25px;
     width: 100%;
     margin: 0 auto;
+    color: #000;
 }
 .cart-total-row {
     border-top: 1px solid {{ settings.border_color }};
