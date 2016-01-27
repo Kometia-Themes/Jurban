@@ -1,4 +1,7 @@
 <div class="product-card">
+    {% if not product.is_in_stock %}
+        <div class="ribbon"><span class="danger">AGOTADO</span></div>
+    {% endif %}
     <a class="product-card__thumb-link" href="/productos/{{ product.permalink }}">
         {% if product.image_url is defined %}
         <img class="img-responsive product-card__thumb-image" src="{{ product.image_url }}" alt="{{ product.name }}">

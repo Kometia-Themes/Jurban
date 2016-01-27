@@ -117,6 +117,34 @@ a.subtitle:visited {
     color: {{ settings.subtitle_color }};
     font-size: {{ settings.subtitle_font_size }};
 }
+.ribbon {
+    position: absolute;
+    right: 15px;
+    top: 0;
+    z-index: 1;
+    overflow: hidden;
+    width: 75px; height: 75px;
+    text-align: center;
+}
+.ribbon span {
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 20px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    width: 100px;
+    display: block;
+    position: absolute;
+    top: 19px;
+    right: -21px;
+}
+.ribbon span.danger {
+    color: #FFF;
+    background: #F70505;
+}
+
 /* * * * * * * */
 /* Form styles */
 /* * * * * * * */
