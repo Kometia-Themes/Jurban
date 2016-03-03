@@ -12,8 +12,9 @@
                     {{ loop.index % 3 == 0 ? '<div class="clearfix product-cards__clearfix-3"></div>': '' }}
                 {% endfor %}
             </div>
+
             <div class="row text-center">
-                {{ paginator|raw }}
+                {% include '_pagination.twig' %}
             </div>
         </div>
     </div>
