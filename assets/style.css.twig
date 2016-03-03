@@ -538,7 +538,7 @@ select.cart__resume-table__product-quantity {
     -webkit-appearance: none;
     cursor: pointer;
     float: left;
-    background: url('http://store1.shoperti.app/images/caret-down.png') 78% / 19% no-repeat {{ settings.product_card_bg_color }};
+    background: url('{{ 'caret-down.png'|asset_url }}') 78% / 19% no-repeat {{ settings.product_card_bg_color }};
 }
 .cart__resume-table__product-amount {
     padding-top: 18px !important;
