@@ -98,7 +98,7 @@
             <div class="product__description__price">
                 <h4 class="product__description__price-title">Precio</h4>
                 <h3 class="product__description__price-amount">{{ product.price | money('symbol', 'code') }}</h3>
-                <h4 class="product__description__price-compared-amount">{{ sku.compared_price is defined ? sku.compared_price | money('symbol', 'code') : '' }}</h4>
+                <h4 class="product__description__price-compared-amount">{{ product.sku.compared_price is defined ? product.sku.compared_price | money('symbol', 'code') : '' }}</h4>
             </div>
 
             <form action="/carrito/agregar" method="post">
@@ -107,7 +107,7 @@
                 <p>{{ product.description|raw }}</p>
 
                 <div class="row">
-                    {% for attribute, attributeVariants in attributes %}
+                    {% for attribute, attributeVariants in product.skus_modifiers %}
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <h4 class="product__description__variant-title subtitle">{{ attribute }}</h4>
@@ -143,7 +143,7 @@
     {{ parent() }}
     {% if product.is_in_stock %}
         <script type="text/javascript">
-            var skus = {{ skus | json }};
+            var skus = {{ product.skus | json }};
 
             $('.add-to-cart-disabled').hide();
             showSelectedSku();
