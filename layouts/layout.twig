@@ -154,6 +154,7 @@
                         </ul>
                     </div>
                 {% endif %}
+                {% if settings.accept_visa or settings.accept_mastercard or settings.accept_amex %}
                     <div class="col-sm-3">
                         <h5 class="footer__category subtitle">Métodos de pago</h5>
                         <ul class="list-inline footer__payment-methods">
