@@ -86,19 +86,21 @@
     <div class="row footer">
         <div class="col-sm-8">
             <div class="row">
-                <div class="col-sm-3">
-                    <h5 class="footer__category subtitle">Menú</h5>
-                    <ul class="list-unstyled">
-                        {% for links in menus.footer %}
-                            <li>
-                                <a class="footer__category-link" href="{{ links.url }}">
-                                    <h5>{{ links.name }}</h5>
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                {% if blogs|length > 0 %}
+                {% if settings.footer_display_navigation and menus.footer|length > 0 %}
+                    <div class="col-sm-3">
+                        <h5 class="footer__category subtitle">Menú</h5>
+                        <ul class="list-unstyled">
+                            {% for links in menus.footer %}
+                                <li>
+                                    <a class="footer__category-link" href="{{ links.url }}">
+                                        <h5>{{ links.name }}</h5>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                {% if settings.footer_display_blog and blogs|length > 0 %}
                     <div class="col-sm-3">
                         <h5 class="footer__category subtitle">Información</h5>
                         <ul class="list-unstyled">
@@ -112,7 +114,16 @@
                         </ul>
                     </div>
                 {% endif %}
-                {% if settings.footer_display_social %}
+                {% if settings.footer_display_social and (
+                    settings.twitter_link is not empty
+                    or settings.facebook_link is not empty
+                    or settings.google_link is not empty
+                    or settings.youtube_link is not empty
+                    or settings.vimeo_link is not empty
+                    or settings.pinterest_link is not empty
+                    or settings.instagram_link is not empty
+                    or settings.tumblr_link is not empty
+                ) %}
                     <div class="col-sm-3">
                         <h5 class="footer__category subtitle">Síguenos</h5>
                         <ul class="list-inline footer__payment-methods">
@@ -143,20 +154,21 @@
                         </ul>
                     </div>
                 {% endif %}
-                <div class="col-sm-3">
-                    <h5 class="footer__category subtitle">Métodos de pago</h5>
-                    <ul class="list-inline footer__payment-methods">
-                        {% if settings.accept_visa %}
-                            <li><img src="{{ 'visa.png'|asset_url }}" alt="Visa"></li>
-                        {% endif %}
-                        {% if settings.accept_mastercard %}
-                            <li><img src="{{ 'mastercard.png'|asset_url }}" alt="MasterCard"></li>
-                        {% endif %}
-                        {% if settings.accept_amex %}
-                            <li><img src="{{ 'amex.png'|asset_url }}" alt="American Express"></li>
-                        {% endif %}
-                    </ul>
-                </div>
+                    <div class="col-sm-3">
+                        <h5 class="footer__category subtitle">Métodos de pago</h5>
+                        <ul class="list-inline footer__payment-methods">
+                            {% if settings.accept_visa %}
+                                <li><img src="{{ 'visa.png'|asset_url }}" alt="Visa"></li>
+                            {% endif %}
+                            {% if settings.accept_mastercard %}
+                                <li><img src="{{ 'mastercard.png'|asset_url }}" alt="MasterCard"></li>
+                            {% endif %}
+                            {% if settings.accept_amex %}
+                                <li><img src="{{ 'amex.png'|asset_url }}" alt="American Express"></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                {% endif %}
             </div>
         </div>
 

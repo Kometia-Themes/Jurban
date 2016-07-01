@@ -369,13 +369,13 @@
           "settings": [
             {
               "type": "checkbox",
-              "id": "footer_display_blog",
-              "label": "Mostrar blogs"
+              "id": "footer_display_navigation",
+              "label": "Mostrar menú"
             },
             {
               "type": "checkbox",
-              "id": "footer_display_navigation",
-              "label": "Mostrar menú"
+              "id": "footer_display_blog",
+              "label": "Mostrar blogs"
             },
             {
               "type": "checkbox",
