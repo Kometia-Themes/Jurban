@@ -1,213 +1,239 @@
-<!DOCTYPE html>
-
-<html lang="en">
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' /><![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {% block meta %}{% endblock meta %}
+  {% if settings.use_favicon %}
+  <link rel="shortcut icon" href="{{ settings['favicon.png'] | asset_url }}" type="image/png" />
+  {% endif %}
 
-    {% block css_head %}
+  <title>{{ page_title }}{% if current_page != 1 %} | Página {{ current_page }}{% endif %}{% if store.name not in page_title %} | {{ store.name }}{% endif %}</title>
 
-    {% if settings.use_favicon %}
-    <link rel="shortcut icon" href="{{ settings['favicon.png'] }}" />
-    {% else %}
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
-    {% endif %}
+  {% if page_description %}
+  <meta name="description" content="{{ page_description }}"/>
+  {% endif %}
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/1.2.65/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/photoswipe.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/default-skin/default-skin.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.5.0/flexslider.min.css">
-    <link rel="stylesheet" href="{{ 'style.css' | asset_url }}" media="screen">
+  <link rel="canonical" href="{{ canonical_url }}" />
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    {% endblock css_head %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.materialdesignicons.com/1.6.50/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/photoswipe.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/default-skin/default-skin.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/flexslider/2.5.0/flexslider.min.css">
+  <link rel="stylesheet" href="{{ 'style.css' | asset_url }}" media="screen">
 
-    {% block head_js %}{% endblock head_js %}
+  {% if 'Google' in settings.header_font %}
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family={{ settings.header_font | remove('Google+') }}:300,400,700">
+  {% endif %}
+  {% if 'Google' in settings.base_font %}
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family={{ settings.base_font | remove('Google+') }}:300,400,700">
+  {% endif %}
 
-    <title>{{ store.name }}{% block title %}{% endblock title %}</title>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 
 </head>
 
 <body role="document">
-
-<div class="header">
+  <div class="header">
     <div class="container">
-        <div class="row">
-            {% include '_notifications.twig' %}
+      <div class="row">
+          {# HEADER LINKS #}
+          <div class="col-xs-6">
+            {% if settings.display_search %}
+            <a class="header__top-link" href="/buscar">
+              <i class="mdi mdi-magnify"></i>
+              Buscar
+            </a>
+            {% endif %}
+          </div>
+          <div class="col-xs-6 text-right">
+            <a href="/carrito" class="header__top-link">
+              Carrito <i class="mdi mdi-cart"></i> <sup>{{ cart.total_items }}</sup>
+            </a>
+          </div>
 
-            {# HEADER LINKS #}
-            <div class="col-xs-6">
-                {% if settings.display_search %}
-                    <a class="header__top-link" href="/buscar">Buscar</a>
-                {% endif %}
-            </div>
-            <div class="col-xs-6 text-right">
-                <a href="/carrito" class="header__top-link">
-                    Carrito <span class="glyphicon glyphicon-shopping-cart"></span> <sup>{{ cart.total_items }}</sup>
-                </a>
-            </div>
-
-            {# TITLE #}
-            <div class="col-sm-12 text-center">
-                {% if settings.use_logo %}
-                    <h1 class="header__title"><a href="/"><img height="100" src="{{ settings['logo.png'] }}"></a></h1>
-                {% else %}
-                    <h1 class="header__title"><a href="/">{{ store.name }}</a></h1>
-                {% endif %}
-            </div>
+          {# TITLE #}
+          <div class="col-sm-12 text-center">
+            {% if settings.use_logo %}
+            <h1 class="header__title"><a href="/"><img height="100" src="{{ settings['logo.png'] }}"></a></h1>
+            {% else %}
+            <h1 class="header__title"><a href="/">{{ store.name }}</a></h1>
+            {% endif %}
+          </div>
         </div>
-    </div>
+      </div>
 
-    {# MAIN-MENU #}
-    <div class="main-menu">
+      {# MAIN-MENU #}
+      <div class="main-menu">
         <ul class="list-inline text-center">
-            {% for links in menus.main %}
-            <li>
-                <a href="{{ links.url }}">
-                    <h5 class="text-uppercase">{{ links.name }}</h5>
-                </a>
+          {% for link in menus.main %}
+            {% if link.children | length >= 1 %}
+            <li class="dropdown">
+              <a class="text-uppercase" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                {{ link.name }} <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                {% for children in link.children %}
+                <li>
+                  <a class="text-uppercase" href="{{ children.url }}">
+                    {{ children.name }}
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
             </li>
-            {% endfor %}
+            {% else %}
+            <li>
+              <a class="text-uppercase" href="{{ link.url }}">
+                {{ link.name }}
+              </a>
+            </li>
+            {% endif %}
+          {% endfor %}
         </ul>
+      </div>
     </div>
-</div>
 
-<div class="container body-container">
-    {% block body %}{% endblock body %}
-    <div class="row footer">
+    <div class="container body-container">
+      {% include '_notifications.twig' %}
+      {% block body %}{% endblock body %}
+
+      <div class="row footer">
         <div class="col-sm-8">
-            <div class="row">
-                {% if settings.footer_display_navigation and menus.footer|length > 0 %}
-                    <div class="col-sm-3">
-                        <h5 class="footer__category subtitle">Menú</h5>
-                        <ul class="list-unstyled">
-                            {% for links in menus.footer %}
-                                <li>
-                                    <a class="footer__category-link" href="{{ links.url }}">
-                                        <h5>{{ links.name }}</h5>
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                {% endif %}
-                {% if settings.footer_display_blog and blogs|length > 0 %}
-                    <div class="col-sm-3">
-                        <h5 class="footer__category subtitle">Información</h5>
-                        <ul class="list-unstyled">
-                            {% for blog in blogs %}
-                                <li>
-                                    <a class="footer__category-link" href="/blogs/{{ blog.permalink }}">
-                                        <h5>{{ blog.title }}</h5>
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                {% endif %}
-                {% if settings.footer_display_social and (
-                    settings.twitter_link is not empty
-                    or settings.facebook_link is not empty
-                    or settings.google_link is not empty
-                    or settings.youtube_link is not empty
-                    or settings.vimeo_link is not empty
-                    or settings.pinterest_link is not empty
-                    or settings.instagram_link is not empty
-                    or settings.tumblr_link is not empty
-                ) %}
-                    <div class="col-sm-3">
-                        <h5 class="footer__category subtitle">Síguenos</h5>
-                        <ul class="list-inline footer__payment-methods">
-                            {% if settings.twitter_link is not empty %}
-                                <li><a href="{{ settings.twitter_link }}" target="_blank"><i class="mdi mdi-24px mdi-twitter"></i></a></li>
-                            {% endif %}
-                            {% if settings.facebook_link is not empty %}
-                                <li><a href="{{ settings.facebook_link }}" target="_blank"><i class="mdi mdi-24px mdi-facebook"></i></a></li>
-                            {% endif %}
-                            {% if settings.google_link is not empty %}
-                                <li><a href="{{ settings.google_link }}" target="_blank"><i class="mdi mdi-24px mdi-google-plus"></i></a></li>
-                            {% endif %}
-                            {% if settings.youtube_link is not empty %}
-                                <li><a href="{{ settings.youtube_link }}" target="_blank"><i class="mdi mdi-24px mdi-youtube-play"></i></a></li>
-                            {% endif %}
-                            {% if settings.vimeo_link is not empty %}
-                                <li><a href="{{ settings.vimeo_link }}" target="_blank"><i class="mdi mdi-24px mdi-vimeo"></i></a></li>
-                            {% endif %}
-                            {% if settings.pinterest_link is not empty %}
-                                <li><a href="{{ settings.pinterest_link }}" target="_blank"><i class="mdi mdi-24px mdi-pinterest"></i></a></li>
-                            {% endif %}
-                            {% if settings.instagram_link is not empty %}
-                                <li><a href="{{ settings.instagram_link }}" target="_blank"><i class="mdi mdi-24px mdi-instagram"></i></a></li>
-                            {% endif %}
-                            {% if settings.tumblr_link is not empty %}
-                                <li><a href="{{ settings.tumblr_link }}" target="_blank"><i class="mdi mdi-24px mdi-tumblr"></i></a></li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                {% endif %}
-                {% if settings.accept_visa or settings.accept_mastercard or settings.accept_amex %}
-                    <div class="col-sm-3">
-                        <h5 class="footer__category subtitle">Métodos de pago</h5>
-                        <ul class="list-inline footer__payment-methods">
-                            {% if settings.accept_visa %}
-                                <li><img src="{{ 'visa.png'|asset_url }}" alt="Visa"></li>
-                            {% endif %}
-                            {% if settings.accept_mastercard %}
-                                <li><img src="{{ 'mastercard.png'|asset_url }}" alt="MasterCard"></li>
-                            {% endif %}
-                            {% if settings.accept_amex %}
-                                <li><img src="{{ 'amex.png'|asset_url }}" alt="American Express"></li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                {% endif %}
+          <div class="row">
+            {% if settings.footer_display_navigation and menus.footer|length > 0 %}
+            <div class="col-sm-3">
+              <h5 class="footer__category subtitle">Menú</h5>
+              <ul class="list-unstyled">
+                {% for links in menus.footer %}
+                <li>
+                  <a class="footer__category-link" href="{{ links.url }}">
+                    <h5>{{ links.name }}</h5>
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
             </div>
+            {% endif %}
+            {% if settings.footer_display_blog and blogs|length > 0 %}
+            <div class="col-sm-3">
+              <h5 class="footer__category subtitle">Información</h5>
+              <ul class="list-unstyled">
+                {% for blog in blogs %}
+                <li>
+                  <a class="footer__category-link" href="/blogs/{{ blog.permalink }}">
+                    <h5>{{ blog.title }}</h5>
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+            {% if settings.footer_display_social and (
+                settings.twitter_link is not empty
+                or settings.facebook_link is not empty
+                or settings.google_link is not empty
+                or settings.youtube_link is not empty
+                or settings.vimeo_link is not empty
+                or settings.pinterest_link is not empty
+                or settings.instagram_link is not empty
+                or settings.tumblr_link is not empty
+            ) %}
+            <div class="col-sm-3">
+              <h5 class="footer__category subtitle">Síguenos</h5>
+              <ul class="list-inline footer__payment-methods">
+                {% if settings.twitter_link is not empty %}
+                <li><a href="{{ settings.twitter_link }}" target="_blank"><i class="mdi mdi-24px mdi-twitter"></i></a></li>
+                {% endif %}
+                {% if settings.facebook_link is not empty %}
+                <li><a href="{{ settings.facebook_link }}" target="_blank"><i class="mdi mdi-24px mdi-facebook"></i></a></li>
+                {% endif %}
+                {% if settings.google_link is not empty %}
+                <li><a href="{{ settings.google_link }}" target="_blank"><i class="mdi mdi-24px mdi-google-plus"></i></a></li>
+                {% endif %}
+                {% if settings.youtube_link is not empty %}
+                <li><a href="{{ settings.youtube_link }}" target="_blank"><i class="mdi mdi-24px mdi-youtube-play"></i></a></li>
+                {% endif %}
+                {% if settings.vimeo_link is not empty %}
+                <li><a href="{{ settings.vimeo_link }}" target="_blank"><i class="mdi mdi-24px mdi-vimeo"></i></a></li>
+                {% endif %}
+                {% if settings.pinterest_link is not empty %}
+                <li><a href="{{ settings.pinterest_link }}" target="_blank"><i class="mdi mdi-24px mdi-pinterest"></i></a></li>
+                {% endif %}
+                {% if settings.instagram_link is not empty %}
+                <li><a href="{{ settings.instagram_link }}" target="_blank"><i class="mdi mdi-24px mdi-instagram"></i></a></li>
+                {% endif %}
+                {% if settings.tumblr_link is not empty %}
+                <li><a href="{{ settings.tumblr_link }}" target="_blank"><i class="mdi mdi-24px mdi-tumblr"></i></a></li>
+                {% endif %}
+              </ul>
+            </div>
+            {% endif %}
+            {% if settings.accept_visa or settings.accept_mastercard or settings.accept_amex %}
+            <div class="col-sm-3">
+              <h5 class="footer__category subtitle">Métodos de pago</h5>
+              <ul class="list-inline footer__payment-methods">
+                {% if settings.accept_visa %}
+                <li><img src="{{ 'visa.png'|asset_url }}" alt="Visa"></li>
+                {% endif %}
+                {% if settings.accept_mastercard %}
+                <li><img src="{{ 'mastercard.png'|asset_url }}" alt="MasterCard"></li>
+                {% endif %}
+                {% if settings.accept_amex %}
+                <li><img src="{{ 'amex.png'|asset_url }}" alt="American Express"></li>
+                {% endif %}
+              </ul>
+            </div>
+            {% endif %}
+          </div>
         </div>
 
         <div class="col-sm-4">
-            {% if settings.footer_display_newsletter %}
-                <h5 class="footer__category subtitle">Suscríbete a nuestro newsletter</h5>
-                <form class="form-inline" method="POST" action="/contacto">
-                    <div class="form-group">
-                        <input type="email" name="email" class="form-control footer__subscribe-input" placeholder="Email">
-                    </div>
-                    <button type="submit" class="btn footer__subscribe-button">Suscríbete</button>
-                </form>
-                <p class="footer__paragraph">{{ settings.mailing_list_text }}</p>
-            {% endif %}
+          {% if settings.footer_display_newsletter %}
+          <h5 class="footer__category subtitle">Suscríbete a nuestro newsletter</h5>
+          <form class="form-inline" method="POST" action="/contacto">
+            <div class="form-group">
+              <input type="email" name="email" class="form-control footer__subscribe-input" placeholder="Email">
+            </div>
+            <button type="submit" class="btn footer__subscribe-button">Suscríbete</button>
+          </form>
+          <p class="footer__paragraph">{{ settings.mailing_list_text }}</p>
+          {% endif %}
         </div>
-    </div>
+      </div>
 
-    <div class="row">
+      <div class="row">
         <div class="col-sm-12 text-center">
-            <p class="footer__copyright">
-                ©2015 {{ store.name }} - Todos los derechos reservados.
-                <a href="https://shoperti.com">Desarrollado por Shoperti</a>
-            </p>
+          <p class="footer__copyright">
+            &copy; {{ 'now' | date("Y") }} {{ store.name }} - Derechos reservados |
+            <a href="https://www.shoperti.com">Tienda generada con Shoperti</a>
+          </p>
         </div>
-    </div>
-</div>
-{% block body_js %}
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/photoswipe.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/photoswipe-ui-default.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.5.0/jquery.flexslider-min.js"></script>
+      </div>
+  </div>
+  {% block body_js %}
 
-    {% if product.images|length > 0 %}
-    <script src="{{ 'scripts.js' | asset_url }}" charset="utf-8"></script>
-    {% endif %}
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/photoswipe.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/photoswipe-ui-default.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.5.0/jquery.flexslider-min.js"></script>
 
-{% endblock body_js %}
+  {% if product.images|length > 0 %}
+  <script src="{{ 'scripts.js' | asset_url }}" charset="utf-8"></script>
+  {% endif %}
+
+  {% endblock body_js %}
 </body>
 </html>
