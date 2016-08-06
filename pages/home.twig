@@ -1,70 +1,71 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-sm-12">
-            {% if settings.slide_1 or settings.slide_2 or settings.slide_3 or settings.slide_4 %}
-                <div class="flexslider">
-                    <ul class="slides">
-                        {% for i in 1..4 %}
-                            {% set slide = 'slide_'~i %}
-                            {% if settings[slide] %}
-                                {% set link = 'slide_'~i~'_link' %}
-                                {% set image = 'slideshow_'~i~'.jpg' %}
-                                {% set text = 'slide_'~i~'_alt' %}
-                                <li>
-                                    {% if settings[link] is not empty %}
-                                        <a href="{{ settings[link] }}">
-                                            <img src="{{ settings[image] }}" />
-                                        </a>
-                                    {% else %}
-                                        <img src="{{ settings[image] }}" />
-                                    {% endif %}
-                                    {% if settings[text] is not empty %}
-                                    <p class="flex-caption">{{ settings[text] | raw }}</p>
-                                    {% endif %}
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-                    <div class="flex-controls"></div>
-                </div>
-            {% endif %}
-        </div>
-
-        {% if settings.frontpage_collection is not empty and collections[settings.frontpage_collection] is defined %}
-            {% set featured_collection = collections[settings.frontpage_collection] %}
-            <div class="col-sm-12">
-                <h3 class="section-title title">
-                    Productos destacados
-                </h3>
-            </div>
-            {% for product in featured_collection.products %}
-                <div class="col-xs-12 col-sm-6 col-lg-4">
-                    {% include '_product.twig' %}
-                </div>
-                {{ loop.index % 2 == 0 ? '<div class="clearfix product-cards__clearfix-2"></div>': '' }}
-                {{ loop.index % 3 == 0 ? '<div class="clearfix product-cards__clearfix-3"></div>': '' }}
-            {% endfor %}
+<div class="row">
+  <div class="col-sm-12">
+    {% if settings.slide_1 or settings.slide_2 or settings.slide_3 or settings.slide_4 %}
+    <div class="flexslider">
+      <ul class="slides">
+        {% for i in 1..4 %}
+        {% set slide = 'slide_'~i %}
+        {% if settings[slide] %}
+        {% set link = 'slide_'~i~'_link' %}
+        {% set image = 'slideshow_'~i~'.jpg' %}
+        {% set text = 'slide_'~i~'_alt' %}
+        <li>
+          {% if settings[link] is not empty %}
+          <a href="{{ settings[link] }}">
+            <img src="{{ settings[image] }}" />
+          </a>
+          {% else %}
+          <img src="{{ settings[image] }}" />
+          {% endif %}
+          {% if settings[text] is not empty %}
+          <p class="flex-caption">{{ settings[text] | raw }}</p>
+          {% endif %}
+        </li>
         {% endif %}
+        {% endfor %}
+      </ul>
+      <div class="flex-controls"></div>
     </div>
+    {% endif %}
+  </div>
+</div>
+
+{% if settings.frontpage_collection is not empty and collections[settings.frontpage_collection] is defined %}
+<div class="row">
+  {% set featured_collection = collections[settings.frontpage_collection] %}
+
+  {% for product_row in featured_collection.products | batch(3)  %}
+  <div class="row">
+    {% for product in product_row %}
+    <div class="col-xs-12 col-sm-6 col-lg-4">
+      {% include '_product.twig' %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
 {% endblock body %}
 
 {% block body_js %}
-    {{ parent() }}
-    <script>
-        $(window).load(function() {
-            if ($('.slides li').size() > 0) {
-                $('.flexslider').flexslider({
-                    animation: "fade",
-                    slideshow: true,
-                    animationDuration: 700,
-                    slideshowSpeed: 6000,
-                    controlsContainer: ".flex-controls",
-                    controlNav: false,
-                    keyboardNav: true
-                }).hover(function(){ $('.flex-direction-nav').fadeIn();}, function(){$('.flex-direction-nav').fadeOut();});
-            }
-        });
-    </script>
-{% endblock body_js %}
+{{ parent() }}
+<script>
+  $(window).load(function() {
+    if ($('.slides li').size() > 0) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        slideshow: true,
+        animationDuration: 700,
+        slideshowSpeed: 6000,
+        controlsContainer: ".flex-controls",
+        controlNav: false,
+        keyboardNav: true
+      }).hover(function(){ $('.flex-direction-nav').fadeIn();}, function(){$('.flex-direction-nav').fadeOut();});
+    }
+  });
+</script>
+{% endblock %}

@@ -18,6 +18,8 @@
   <meta name="description" content="{{ page_description }}"/>
   {% endif %}
 
+  {% include '_og-meta-tags.twig' %}
+
   <link rel="canonical" href="{{ canonical_url }}" />
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -61,16 +63,18 @@
               Carrito <i class="mdi mdi-cart"></i> <sup>{{ cart.total_items }}</sup>
             </a>
           </div>
-
-          {# TITLE #}
-          <div class="col-sm-12 text-center">
-            {% if settings.use_logo %}
-            <h1 class="header__title"><a href="/"><img height="100" src="{{ settings['logo.png'] }}"></a></h1>
-            {% else %}
-            <h1 class="header__title"><a href="/">{{ store.name }}</a></h1>
-            {% endif %}
-          </div>
         </div>
+
+      <div class="row">
+        {# TITLE #}
+        <div class="col-sm-12 text-center">
+          {% if settings.use_logo %}
+          <h1 class="header__title"><a href="/"><img height="120" src="{{ settings['logo.png'] }}"></a></h1>
+          {% else %}
+          <h1 class="header__title"><a href="/">{{ store.name }}</a></h1>
+          {% endif %}
+        </div>
+      </div>
       </div>
 
       {# MAIN-MENU #}
@@ -221,8 +225,8 @@
         </div>
       </div>
   </div>
-  {% block body_js %}
 
+  {% block body_js %}
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/photoswipe.min.js"></script>
@@ -234,6 +238,6 @@
   <script src="{{ 'scripts.js' | asset_url }}" charset="utf-8"></script>
   {% endif %}
 
-  {% endblock body_js %}
+  {% endblock %}
 </body>
 </html>

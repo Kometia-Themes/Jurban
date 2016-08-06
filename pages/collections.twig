@@ -1,20 +1,21 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
-    <div class="row collections">
-        <div class="col-sm-12">
-            <h3 class="section-title title">
-                Colecciones
-            </h3>
-        </div>
-        {% for collection in collections %}
-            <div class="col-sm-4 text-center collections-container">
-                <a href="/colecciones/{{ collection.permalink }}">
-                    <img src="{{ collection.image_url }}" class="img img-responsive center-block" alt="{{ collection.title }}">
-                    <h4 class="collection__title">{{ collection.title }}</h4>
-                </a>
-            </div>
-            {{ loop.index % 3 == 0 ? '<div class="clearfix"></div>': '' }}
-        {% endfor %}
-    </div>
-{% endblock body %}
+<div class="row collections">
+  <div class="col-sm-12">
+    <h3 class="section-title title">
+      Colecciones
+    </h3>
+  </div>
+
+  {% for collection in collections %}
+  <div class="col-sm-4 text-center collections-container">
+    <a href="/colecciones/{{ collection.permalink }}">
+      <img src="{{ collection.image_url }}" class="img img-responsive center-block" alt="{{ collection.title }}">
+      <h4 class="collection__title">{{ collection.title }}</h4>
+    </a>
+  </div>
+  {{ loop.index % 3 == 0 ? '<div class="clearfix"></div>': '' }}
+  {% endfor %}
+</div>
+{% endblock %}

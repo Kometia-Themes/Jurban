@@ -1,221 +1,215 @@
-
 {% extends 'layout.twig' %}
 
 {% block body %}
-    <div class="row product">
-        <div class="col-sm-8">
-            {% if product.images|length > 0 %}
-                <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-                    <div class="flexslider" id="slider">
-                        {% for image in product.images %}
-                            <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                                <a href="{{ image.url }}" itemprop="contentUrl" data-size="600x400">
-                                    <img src="{{ image.url }}" class="img-responsive center-block" itemprop="thumbnail" alt="{{ product.name }}" />
-                                </a>
-                            </figure>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <div class="clearfix"></div>
-                {% if product.images|length > 1 %}
-                    <div class="flexslider" id="carousel">
-                        <ul class="slides">
-                            {% for image in product.images %}
-                                <li>
-                                    <img src="{{ image.url }}" class="img-responsive center-block" alt="{{ product.name }}" />
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                {% endif %}
-                {# Root element of PhotoSwipe. Must have class pswp. #}
-                <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-                    {# Background of PhotoSwipe
-                     It's a separate element as animating opacity is faster than rgba(). #}
-                    <div class="pswp__bg"></div>
-
-                    {# Slides wrapper with overflow:hidden. #}
-                    <div class="pswp__scroll-wrap">
-
-                        {# Container that holds slides.
-                            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-                            Don't modify these 3 pswp__item elements, data is added later on. #}
-                        <div class="pswp__container">
-                            <div class="pswp__item"></div>
-                            <div class="pswp__item"></div>
-                            <div class="pswp__item"></div>
-                        </div>
-
-                        {# Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. #}
-                        <div class="pswp__ui pswp__ui--hidden">
-                            <div class="pswp__top-bar">
-
-                                {# Controls are self-explanatory. Order can be changed. #}
-                                <div class="pswp__counter"></div>
-                                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                                {# Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR #}
-                                {# element will get class pswp__preloader--active when preloader is running #}
-                                <div class="pswp__preloader">
-                                    <div class="pswp__preloader__icn">
-                                        <div class="pswp__preloader__cut">
-                                            <div class="pswp__preloader__donut"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                                <div class="pswp__share-tooltip"></div>
-                            </div>
-
-                            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-                            </button>
-
-                            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-                            </button>
-
-                            <div class="pswp__caption">
-                                <div class="pswp__caption__center"></div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-            {% else %}
-                <img class="img-responsive center-block" src="{{ product.image_url }}" alt="{{ product.name }}">
-            {% endif %}
-        </div>
-
-        <div class="col-sm-4 product-description">
-            <h2 class="product__description-name">{{ product.name }}</h2>
-            {% if not product.is_in_stock %}<span class="label label-danger">Agotado</span>{% endif %}
-
-            <div class="product__description__price">
-                <h4 class="product__description__price-title">Precio</h4>
-                <h3 class="product__description__price-amount">{{ product.price | money('symbol', 'code') }}</h3>
-                <h4 class="product__description__price-compared-amount">{{ product.sku.compared_price is defined ? product.sku.compared_price | money('symbol', 'code') : '' }}</h4>
-            </div>
-
-            <form action="/carrito/agregar" method="post">
-                <input type="hidden" name="sku_id" value="{{ product.sku.id }}">
-                <h4 class="product__description__description-label subtitle">Descripción del producto</h4>
-                <p>{{ product.description|raw }}</p>
-
-                <div class="row">
-                    {% for attribute, attributeVariants in product.skus_modifiers %}
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <h4 class="product__description__variant-title subtitle">{{ attribute }}</h4>
-                                <select class="product__description__variant-select" name="{{ loop.index0 }}">
-                                    {% for attributeVariant in attributeVariants %}
-                                        <option value="{{ loop.index0 }}">{{ attributeVariant }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-
-                {% if product.is_in_stock %}
-                    <button type="submit" class="btn btn-lg js-add-to-cart">
-                        <span class="glyphicon glyphicon-shopping-cart"></span> Añadir al carrito
-                    </button>
-                    <button type="submit" class="btn btn-lg js-add-to-cart-disabled" disabled="disabled">
-                        No disponible
-                    </button>
-                {% else %}
-                    <button class="btn btn-lg js-add-to-cart-disabled" disabled="disabled">
-                        No disponible
-                    </button>
-                {% endif %}
-            </form>
-        </div>
+<div class="row product">
+  <div class="col-sm-8">
+    {% if product.images | length > 0 %}
+    <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+      <div class="flexslider" id="slider">
+        {% for image in product.images %}
+        <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+          <a href="{{ image.url }}" itemprop="contentUrl" data-size="600x400">
+            <img src="{{ image.url }}" class="img-responsive center-block" itemprop="thumbnail" alt="{{ product.name }}" />
+          </a>
+        </figure>
+        {% endfor %}
+      </div>
     </div>
 
+    <div class="clearfix"></div>
+    {% if product.images | length > 1 %}
+    <div class="flexslider" id="carousel">
+      <ul class="slides">
+        {% for image in product.images %}
+        <li>
+          <img src="{{ image.url }}" class="img-responsive center-block" alt="{{ product.name }}" />
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    {# Root element of PhotoSwipe. Must have class pswp. #}
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        {# Background of PhotoSwipe
+        It's a separate element as animating opacity is faster than rgba(). #}
+        <div class="pswp__bg"></div>
+
+        {# Slides wrapper with overflow:hidden. #}
+        <div class="pswp__scroll-wrap">
+          {# Container that holds slides.
+          PhotoSwipe keeps only 3 of them in the DOM to save memory.
+          Don't modify these 3 pswp__item elements, data is added later on. #}
+          <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+          </div>
+
+          {# Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. #}
+          <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+
+              {# Controls are self-explanatory. Order can be changed. #}
+              <div class="pswp__counter"></div>
+              <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+              {# Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR #}
+              {# element will get class pswp__preloader--active when preloader is running #}
+              <div class="pswp__preloader">
+                <div class="pswp__preloader__icn">
+                  <div class="pswp__preloader__cut">
+                    <div class="pswp__preloader__donut"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+              <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+              <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <img class="img-responsive center-block" src="{{ product.image_url }}" alt="{{ product.name }}">
+    {% endif %}
+  </div>
+
+  <div class="col-sm-4 product-description">
+    <h2 class="product__description-name">{{ product.name }}</h2>
+    {% if not product.is_in_stock %}<span class="label label-danger">Agotado</span>{% endif %}
+
+    <div class="product__description__price">
+      <h4 class="product__description__price-title">Precio</h4>
+      <h3 class="product__description__price-amount">{{ product.price | money('symbol', 'code') }}</h3>
+      <h4 class="product__description__price-compared-amount">{{ product.sku.compared_price is defined ? product.sku.compared_price | money('symbol', 'code') : '' }}</h4>
+    </div>
+
+    <form action="/carrito/agregar" method="post">
+      <input type="hidden" name="sku_id" value="{{ product.sku.id }}">
+      <h4 class="product__description__description-label subtitle">Descripción del producto</h4>
+      <p>{{ product.description|raw }}</p>
+
+      <div class="row">
+        {% for attribute, attributeVariants in product.skus_modifiers %}
+        <div class="col-sm-12">
+          <div class="form-group">
+            <h4 class="product__description__variant-title subtitle">{{ attribute }}</h4>
+            <select class="product__description__variant-select" name="{{ loop.index0 }}">
+              {% for attributeVariant in attributeVariants %}
+              <option value="{{ loop.index0 }}">{{ attributeVariant }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      {% if product.is_in_stock %}
+      <button type="submit" class="btn btn-lg js-add-to-cart">
+        <span class="glyphicon glyphicon-shopping-cart"></span> Añadir al carrito
+      </button>
+      <button type="submit" class="btn btn-lg js-add-to-cart-disabled" disabled="disabled">
+        No disponible
+      </button>
+      {% else %}
+      <button class="btn btn-lg js-add-to-cart-disabled" disabled="disabled">
+        No disponible
+      </button>
+      {% endif %}
+    </form>
+  </div>
+</div>
 {% endblock body %}
 
 {% block body_js %}
-    {{ parent() }}
-    {% if product.is_in_stock %}
-        <script type="text/javascript">
-            var skus = {{ product.skus | json }};
+{{ parent() }}
+  {% if product.is_in_stock %}
+  <script type="text/javascript">
+  var skus = {{ product.skus | json }};
 
-            $('.add-to-cart-disabled').hide();
-            showSelectedSku();
+  $('.add-to-cart-disabled').hide();
+  showSelectedSku();
 
-            function showSelectedSku() {
-                // only one sku, no variants to validate
-                if (skus.length == 1) {
-                    return updateSkuControls(skus[0]);
-                }
+  function showSelectedSku() {
+    // only one sku, no variants to validate
+    if (skus.length == 1) {
+      return updateSkuControls(skus[0]);
+    }
 
-                // get the product variant modifiers from the selects
-                var selectedModifiers = [];
-                $('select.product__description__variant-select').each(function () {
-                    selectedModifiers.push($(this).find(":selected").text());
-                });
+    // get the product variant modifiers from the selects
+    var selectedModifiers = [];
+    $('select.product__description__variant-select').each(function () {
+      selectedModifiers.push($(this).find(":selected").text());
+    });
 
-                var foundSku = null;
-                // check if there's an sku with the selected modifiers
-                skus.forEach(function (sku) {
-                    var modifiers = sku.modifiers;
-                    if ($(modifiers).not(selectedModifiers).length === 0
-                        && $(selectedModifiers).not(modifiers).length === 0) {
-                        foundSku = sku;
-                        return false;
-                    }
-                });
+    var foundSku = null;
+    // check if there's an sku with the selected modifiers
+    skus.forEach(function (sku) {
+      var modifiers = sku.modifiers;
+      if ($(modifiers).not(selectedModifiers).length === 0
+        && $(selectedModifiers).not(modifiers).length === 0) {
+        foundSku = sku;
+      return false;
+    }
+  });
 
-                return updateSkuControls(foundSku);
-            }
+    return updateSkuControls(foundSku);
+  }
 
-            function updateSkuControls(sku) {
-                var enabledAddButton = $('.js-add-to-cart');
-                var disabledAddButton = $('.js-add-to-cart-disabled');
-                var comparedPriceElement = $('.product__description__price-compared-amount');
+  function updateSkuControls(sku) {
+    var enabledAddButton = $('.js-add-to-cart');
+    var disabledAddButton = $('.js-add-to-cart-disabled');
+    var comparedPriceElement = $('.product__description__price-compared-amount');
 
-                if (sku !== null) {
-                    if (sku.stock_policy !== 'none' && sku.in_stock < 1) {
-                        sku = null;
-                    }
-                }
+    if (sku !== null) {
+      if (sku.stock_policy !== 'none' && sku.in_stock < 1) {
+        sku = null;
+      }
+    }
 
-                if (sku !== null) {
-                    disabledAddButton.hide();
-                    enabledAddButton.show();
-                    $('input[name=sku_id]').val(sku.id);
-                    $('.product__description__price-amount').html(formatPrice(sku.price));
-                    if (sku.compared_price != 0) {
-                        comparedPriceElement.html(formatPrice(sku.compared_price)).show();
-                    } else {
-                        comparedPriceElement.hide();
-                    }
-                }
-                else {
-                    disabledAddButton.show();
-                    enabledAddButton.hide();
-                    comparedPriceElement.hide();
-                }
+    if (sku !== null) {
+      disabledAddButton.hide();
+      enabledAddButton.show();
+      $('input[name=sku_id]').val(sku.id);
+      $('.product__description__price-amount').html(formatPrice(sku.price));
+      if (sku.compared_price != 0) {
+        comparedPriceElement.html(formatPrice(sku.compared_price)).show();
+      } else {
+        comparedPriceElement.hide();
+      }
+    }
+    else {
+      disabledAddButton.show();
+      enabledAddButton.hide();
+      comparedPriceElement.hide();
+    }
 
-                return sku;
-            }
+    return sku;
+  }
 
-            function formatPrice(price) {
-                price /= 100;
-                price = price.toFixed(2);
-                price = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                return '$ ' + price + ' {{ store.currency }}';
-            }
+  function formatPrice(price) {
+    price /= 100;
+    price = price.toFixed(2);
+    price = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return '$ ' + price + ' {{ store.currency }}';
+  }
 
-            $('select.product__description__variant-select').change(function () {
-                showSelectedSku();
-            });
-        </script>
-    {% endif %}
+  $('select.product__description__variant-select').change(function () {
+    showSelectedSku();
+  });
+</script>
+{% endif %}
 
 {% endblock body_js %}

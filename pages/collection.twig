@@ -1,44 +1,44 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
+<div class="row">
+  <div class="col-sm-12 text-center">
+    <h3 class="section-title title">
+      {{ collection.title }}
+    </h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-3 products-filter">
+    <h4 class="products-filter__title title">Categorías</h4>
+    <form>
+      {#{% for param in params %}#}
+      <div class="form-group products-filter__container">
+        <div class="checkbox-control">
+          <input class="checkbox-control__input checkbox-control__input--primary" type="checkbox" id="ejemplo" checked>
+          <label class="checkbox-control__label" for="ejemplo">Ejemplo</label>
+        </div>
+      </div>
+      {#{% endfor %}#}
+    </form>
+    <hr>
+  </div>
+
+  <div class="col-sm-9">
     <div class="row">
-        <div class="col-sm-12 text-center">
-            <h3 class="section-title title">
-                {{ collection.title }}
-            </h3>
-        </div>
+      {% for product in products %}
+      <div class="col-xs-12 col-sm-6 col-lg-4">
+        {% include '_product.twig' %}
+      </div>
+      {{ loop.index % 2 == 0 ? '<div class="clearfix product-cards__clearfix-2"></div>': '' }}
+      {{ loop.index % 3 == 0 ? '<div class="clearfix product-cards__clearfix-3"></div>': '' }}
+      {% endfor %}
     </div>
+  </div>
 
-    <div class="row">
-        <div class="col-sm-3 products-filter">
-            <h4 class="products-filter__title title">Categorías</h4>
-            <form>
-                {#{% for param in params %}#}
-                <div class="form-group products-filter__container">
-                    <div class="checkbox-control">
-                        <input class="checkbox-control__input checkbox-control__input--primary" type="checkbox" id="ejemplo" checked>
-                        <label class="checkbox-control__label" for="ejemplo">Ejemplo</label>
-                    </div>
-                </div>
-                {#{% endfor %}#}
-            </form>
-            <hr>
-        </div>
-
-        <div class="col-sm-9">
-            <div class="row">
-                {% for product in products %}
-                    <div class="col-xs-12 col-sm-6 col-lg-4">
-                        {% include '_product.twig' %}
-                    </div>
-                    {{ loop.index % 2 == 0 ? '<div class="clearfix product-cards__clearfix-2"></div>': '' }}
-                    {{ loop.index % 3 == 0 ? '<div class="clearfix product-cards__clearfix-3"></div>': '' }}
-                {% endfor %}
-            </div>
-        </div>
-
-        <div class="row text-center">
-            {% include '_pagination.twig' %}
-        </div>
-    </div>
-{% endblock body %}
+  <div class="row text-center">
+    {% include '_pagination.twig' %}
+  </div>
+</div>
+{% endblock %}
