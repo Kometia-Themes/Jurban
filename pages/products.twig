@@ -1,21 +1,40 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
+
+<ul class="breadcrumb">
+  <li><a href="/">Inicio</a></li>
+  <li class="active">Productos</li>
+</ul>
+
 <div class="row">
   <div class="col-sm-12">
-    <div class="row">
-      {% for product in products %}
-      <div class="col-xs-12 col-sm-6 col-lg-4">
-        {% include '_product.twig' %}
-      </div>
-      {{ loop.index % 2 == 0 ? '<div class="clearfix product-cards__clearfix-2"></div>': '' }}
-      {{ loop.index % 3 == 0 ? '<div class="clearfix product-cards__clearfix-3"></div>': '' }}
-      {% endfor %}
-    </div>
-
-    <div class="row text-center">
-      {% include '_pagination.twig' %}
-    </div>
+    <h1 class="section-title">{{ page_title }}</h1>
   </div>
 </div>
-{% endblock body %}
+
+{% if products.count == 0 %}
+
+  {% include '_products-placeholder.twig' %}
+
+{% else %}
+
+<div class="row">
+  <div class="col-sm-12">
+    {% for products_row in products | batch(3) %}
+    <div class="row">
+      {% for product in products_row %}
+      <div class="col-xs-12 col-sm-4">
+        {% include '_product.twig' %}
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% include '_pagination.twig' %}
+
+{% endif %}
+
+{% endblock %}

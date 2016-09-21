@@ -11,37 +11,11 @@
         <h5 class="post__publication-date">{{ post.published_at | datetime }}</h5>
       </div>
     </div>
-    <p class="post__content">{{ post.content | raw }}</p>
+    <p class="post__content">{{ post.content }}</p>
   </div>
 
   <div class="col-sm-3 related-posts">
-    <h4 class="related-posts__header title">Últimos artículos</h4>
-
-    <div class="media">
-      <div class="media-left">
-        <a href="#">
-          <img class="media-object related-posts__post-thumb" src="http://lorempixel.com/fashion/60/60" alt="{{ post.title }}">
-        </a>
-      </div>
-      <div class="media-body">
-        <h4 class="media-heading related-posts__post-title">Jeans urbans</h4>
-        <p class="related-posts__post-summary">Aquí es donde se muestra la descripción de su producto</p>
-      </div>
-    </div>
-
-    {% if post.tags | length > 0 %}
-    <hr>
-    <h4 class="tags__title title">Tags</h4>
-    <ul class="tags__list">
-      {% for tag in post.tags %}
-      <li>
-        <a class="tags__list-item-link" href="/blogs/{{ post.blog.permalink }}/tags/{{ tag.permalink }}">
-          {{ tag.title }}
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
-    {% endif %}
+    {% include '_blog-sidebar.twig' %}
   </div>
 </div>
 {% endblock %}

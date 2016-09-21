@@ -1,71 +1,68 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
+
+{% if settings.slide_1 or settings.slide_2 or settings.slide_3 or settings.slide_4 %}
 <div class="row">
   <div class="col-sm-12">
-    {% if settings.slide_1 or settings.slide_2 or settings.slide_3 or settings.slide_4 %}
-    <div class="flexslider">
-      <ul class="slides">
-        {% for i in 1..4 %}
-        {% set slide = 'slide_'~i %}
-        {% if settings[slide] %}
-        {% set link = 'slide_'~i~'_link' %}
-        {% set image = 'slideshow_'~i~'.jpg' %}
-        {% set text = 'slide_'~i~'_alt' %}
-        <li>
-          {% if settings[link] is not empty %}
-          <a href="{{ settings[link] }}">
-            <img src="{{ settings[image] }}" />
-          </a>
-          {% else %}
-          <img src="{{ settings[image] }}" />
-          {% endif %}
-          {% if settings[text] is not empty %}
-          <p class="flex-caption">{{ settings[text] | raw }}</p>
-          {% endif %}
-        </li>
+    <div class="js-slider">
+      {% for i in 1..4 %}
+      {% set slide = 'slide_'~i %}
+      {% if settings[slide] %}
+      {% set link = 'slide_'~i~'_link' %}
+      {% set image = 'slideshow_'~i~'.jpg' %}
+      {% set text = 'slide_'~i~'_alt' %}
+      <div class="slide">
+        {% if settings[link] is not empty %}
+        <a href="{{ settings[link] }}">
+          <img class="img-responsive" src="{{ settings[image] }}" />
+        </a>
+        {% else %}
+        <img class="img-responsive" src="{{ settings[image] }}" />
         {% endif %}
-        {% endfor %}
-      </ul>
-      <div class="flex-controls"></div>
+        {% if settings[text] is not empty %}
+        <p class="slide__caption">{{ settings[text] | raw }}</p>
+        {% endif %}
+      </div>
+      {% endif %}
+      {% endfor %}
     </div>
-    {% endif %}
   </div>
-</div>
-
-{% if settings.frontpage_collection is not empty and collections[settings.frontpage_collection] is defined %}
-<div class="row">
-  {% set featured_collection = collections[settings.frontpage_collection] %}
-
-  {% for product_row in featured_collection.products | batch(3)  %}
-  <div class="row">
-    {% for product in product_row %}
-    <div class="col-xs-12 col-sm-6 col-lg-4">
-      {% include '_product.twig' %}
-    </div>
-    {% endfor %}
-  </div>
-  {% endfor %}
 </div>
 {% endif %}
 
-{% endblock body %}
+{% if settings.frontpage_collection is not empty %}
+  {% set featured_collection = collections[settings.frontpage_collection] %}
+  {% set products_per_row = settings.frontpage_products_per_row ?: 3 %}
 
-{% block body_js %}
-{{ parent() }}
-<script>
-  $(window).load(function() {
-    if ($('.slides li').size() > 0) {
-      $('.flexslider').flexslider({
-        animation: "fade",
-        slideshow: true,
-        animationDuration: 700,
-        slideshowSpeed: 6000,
-        controlsContainer: ".flex-controls",
-        controlNav: false,
-        keyboardNav: true
-      }).hover(function(){ $('.flex-direction-nav').fadeIn();}, function(){$('.flex-direction-nav').fadeOut();});
-    }
-  });
-</script>
+  {% if featured_collection.products.count == 0 %}
+
+    {% include '_featured-placeholder.twig' %}
+
+  {% else %}
+
+    {% for products_row in featured_collection.products | batch(products_per_row)  %}
+    <div class="row">
+      {% for product in products_row %}
+      <div class="col-xs-12 col-sm-{{ 12 / products_per_row }}">
+        {% include '_product.twig' %}
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+
+  {% endif %}
+
+{% endif %}
+
+{% if settings.frontpage_page is not empty and pages[settings.frontpage_page] is defined %}
+  {% set featured_page = pages[settings.frontpage_page] %}
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>{{ featured_page.title | escape }}</h2>
+      {{ featured_page.content }}
+    </div>
+  </div>
+{% endif %}
+
 {% endblock %}
