@@ -45,7 +45,7 @@
           <thead>
             <tr>
               <th>Nombre</th>
-              <th>Cantidad</th>
+              <th class="text-center">Cantidad</th>
               <th class="text-right">Precio</th>
             </tr>
           </thead>
@@ -58,16 +58,13 @@
                 </a>
               </td>
               <td class="text-center">{{ item.quantity }}</td>
-              <td>
-                {{ item.product_name }}
-              </td>
               <td class="text-right">{{ item.price | money('symbol', 'code') }}</td>
             </tr>
           {% endfor %}
           </tbody>
           <tfoot>
             <tr>
-              <td class="text-right" colspan="3">Estado: <strong>{{ order.financial_status_label }}</strong></td>
+              <td class="text-right" colspan="2">Estado: <strong>{{ order.financial_status_label }}</strong></td>
               <td class="text-right" >Total: {{ order.total_price | money('symbol', 'code') }}</td>
             </tr>
           </tfoot>

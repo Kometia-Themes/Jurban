@@ -17,7 +17,7 @@
         <img src="{{ product.image_url }}" class="img-responsive center-block" id="zoom" itemprop="thumbnail" alt="{{ product.name }}" />
       </figure>
       {% else %}
-      <img src="{{ 'placeholder_product.svg' | asset_url }}">
+      <img src="{{ 'placeholders/product-11.jpg' | global_img_url }}" class="img-responsive center-block">
       {% endif %}
       </div>
     </div>
@@ -59,6 +59,7 @@
 
     <form action="/carrito/agregar" method="post">
       <input type="hidden" name="sku_id" value="{{ product.sku.id }}" id="js-sku-id">
+
       {% for attribute, attribute_variants in product.skus_modifiers %}
       <div class="form-group">
         <label>{{ attribute }}</label>

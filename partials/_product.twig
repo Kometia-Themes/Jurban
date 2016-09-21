@@ -10,7 +10,7 @@
       {% if product.image_url is defined %}
       <img class="img-responsive product-card__thumb-image" src="{{ product.image_url }}" alt="{{ product.name }}">
       {% else %}
-      <img class="img-responsive product-card__thumb-image" src="{{ 'placeholder.svg' | asset_url }}" alt="{{ product.name }}">
+      <img class="img-responsive product-card__thumb-image" src="{{ 'placeholders/product-11.jpg' | global_img_url }}" alt="{{ product.name }}">
       {% endif %}
     </a>
   </div>
