@@ -12,11 +12,7 @@
   <link rel="shortcut icon" href="{{ settings['favicon.png'] | asset_url }}" type="image/png" />
   {% endif %}
 
-  <title>{{ page_title }}{% if current_page != 1 %} | Página {{ current_page }}{% endif %}{% if store.name not in page_title %} | {{ store.name }}{% endif %}</title>
-
-  {% if page_description %}
-  <meta name="description" content="{{ page_description }}"/>
-  {% endif %}
+  <title>Mantenimiento | {{ store.name }}</title>
 
   <link rel="canonical" href="{{ canonical_url }}" />
 
