@@ -1,1 +1,1 @@
-# Jurban
+# Shoperti Jurban Theme
