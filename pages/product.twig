@@ -89,11 +89,17 @@
       </div>
     </form>
 
+    {% if settings.enable_share_products %}
     <hr>
+    {% include '_social-share.twig' %}
+    {% endif %}
 
+    {% if product.description is not empty %}
+    <hr>
     <div class="product-single__description">
       {{ product.description }}
     </div>
+    {% endif %}
   </div>
 </div>
 {% endblock %}
@@ -117,22 +123,41 @@
     return '$ ' + formatPrice + ' {{ store.currency }}';
   }
 
-  new Shoperti.SkuSelect({
-    selector: 'sku-selectors',
-    skus: {{ product.skus | json }}
-  }, function(sku) {
-    if (sku && !(sku.stock_policy !== 'none' && sku.in_stock < 1)) {
-      jQuery('#js-sku-id').val(sku.id);
-      jQuery('#js-add-to-cart').removeClass('disabled').removeAttr('disabled', 'disabled')
-      if (sku.price < sku.compared_price) {
-        jQuery('#js-price-preview').html("<del>" + formatMoney(sku.compared_price) + "</del> " + formatMoney(sku.price));
+  $(document).ready(function () {
+    var firstLoad = true;
+
+    new Shoperti.SkuSelect({
+      selector: 'sku-selectors',
+      skus: {{ product.skus | json }}
+    }, function(sku) {
+      if (sku && !(sku.stock_policy !== 'none' && sku.in_stock < 1)) {
+        jQuery('#js-sku-id').val(sku.id);
+        jQuery('#js-add-to-cart').removeClass('disabled').removeAttr('disabled', 'disabled')
+        if (sku.price < sku.compared_price) {
+          jQuery('#js-price-preview').html("<del>" + formatMoney(sku.compared_price) + "</del> " + formatMoney(sku.price));
+        } else {
+          jQuery('#js-price-preview').html(formatMoney(sku.price));
+        }
+        var image = sku.image_url;
+        if (!firstLoad) {
+          {% if settings.enable_product_image_zoom %}
+          var ez = $('#zoom').data('elevateZoom');
+          if (ez.getCurrentImage() != image) {
+            ez.swaptheimage(image, image);
+          }
+          {% else %}
+          var ez = $('#zoom');
+          if (ez.attr('src') != image) {
+            ez.attr("src", image);
+          }
+          {% endif %}
+        }
+        firstLoad = false;
       } else {
-        jQuery('#js-price-preview').html(formatMoney(sku.price));
+        jQuery('#js-add-to-cart').addClass('disabled').attr('disabled', 'disabled')
+        jQuery('#js-price-preview').html('No disponible');
       }
-    } else {
-      jQuery('#js-add-to-cart').addClass('disabled').attr('disabled', 'disabled')
-      jQuery('#js-price-preview').html('No disponible');
-    }
+    });
   });
 </script>
 {% endif %}

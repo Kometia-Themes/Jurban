@@ -2,67 +2,18 @@
 
 {% block body %}
 
-{% if settings.slide_1 or settings.slide_2 or settings.slide_3 or settings.slide_4 %}
-<div class="row">
-  <div class="col-sm-12">
-    <div class="js-slider">
-      {% for i in 1..4 %}
-      {% set slide = 'slide_'~i %}
-      {% if settings[slide] %}
-      {% set link = 'slide_'~i~'_link' %}
-      {% set image = 'slideshow_'~i~'.jpg' %}
-      {% set text = 'slide_'~i~'_alt' %}
-      <div class="slide">
-        {% if settings[link] is not empty %}
-        <a href="{{ settings[link] }}">
-          <img class="img-responsive" src="{{ settings[image] }}" />
-        </a>
-        {% else %}
-        <img class="img-responsive" src="{{ settings[image] }}" />
-        {% endif %}
-        {% if settings[text] is not empty %}
-        <p class="slide__caption">{{ settings[text] | raw }}</p>
-        {% endif %}
-      </div>
-      {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-</div>
+{% if settings.frontpage_section_1 is not empty and settings.frontpage_section_1 != 'none' %}
+  {% include '_' ~ settings.frontpage_section_1 ~ '.twig' %}
+  <hr>
 {% endif %}
 
-{% if settings.frontpage_collection is not empty %}
-  {% set featured_collection = collections[settings.frontpage_collection] %}
-  {% set products_per_row = settings.frontpage_products_per_row ?: 3 %}
-
-  {% if featured_collection.products.count == 0 %}
-
-    {% include '_featured-placeholder.twig' %}
-
-  {% else %}
-
-    {% for products_row in featured_collection.products | batch(products_per_row)  %}
-    <div class="row">
-      {% for product in products_row %}
-      <div class="col-xs-12 col-sm-{{ 12 / products_per_row }}">
-        {% include '_product.twig' %}
-      </div>
-      {% endfor %}
-    </div>
-    {% endfor %}
-
-  {% endif %}
-
+{% if settings.frontpage_section_2 is not empty and settings.frontpage_section_2 != 'none' %}
+  {% include '_' ~ settings.frontpage_section_2 ~ '.twig' %}
 {% endif %}
 
-{% if settings.frontpage_page is not empty and pages[settings.frontpage_page] is defined %}
-  {% set featured_page = pages[settings.frontpage_page] %}
-  <div class="row">
-    <div class="col-sm-12">
-      <h2>{{ featured_page.title | escape }}</h2>
-      {{ featured_page.content }}
-    </div>
-  </div>
+{% if settings.frontpage_section_3 is not empty and settings.frontpage_section_3 != 'none' %}
+  <hr>
+  {% include '_' ~ settings.frontpage_section_3 ~ '.twig' %}
 {% endif %}
 
 {% endblock %}

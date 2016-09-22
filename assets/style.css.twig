@@ -248,7 +248,6 @@ a.subtitle:visited {
 
 .checkbox-control__label {
   margin-top: 0;
-  font-weight: 300;
   display: inline-block;
   vertical-align: middle;
   position: relative;
@@ -474,7 +473,6 @@ input.checkbox-control__input[type="checkbox"]:disabled + label::before {
 
 .product-single__name {
   font-family: {{ settings.header_font | remove('Google+') | replace({'+': ' '}) }};
-  font-weight: 300;
   color: {{ settings.title_color }};
 }
 
@@ -505,18 +503,12 @@ ul.category li a {
 
 .blog-posts__post-title {
   font-family: {{ settings.header_font | remove('Google+') | replace({'+': ' '}) }};
-  font-weight: 300;
   text-transform: uppercase;
-}
-
-.blog-posts__post-summary {
-  font-weight: 300;
 }
 
 /* - - - - */
 
 .post__title {
-  font-weight: 300;
   margin-top: 5px;
   margin-bottom: 15px;
   text-transform: uppercase;
@@ -525,22 +517,15 @@ ul.category li a {
 .post__publication-date {
   float: right;
   text-transform: uppercase;
-  font-weight: 300;
-}
-
-.post__content {
-  font-weight: 300;
 }
 
 .related-posts__header {
   font-family: {{ settings.header_font | remove('Google+') | replace({'+': ' '}) }};
-  font-weight: 300;
   text-transform: uppercase;
 }
 
 .related-posts__post-title {
   font-family: {{ settings.header_font | remove('Google+') | replace({'+': ' '}) }};
-  font-weight: 300;
 }
 
 .related-posts__post-thumb {
@@ -551,7 +536,6 @@ ul.category li a {
 
 .tags__title {
   font-family: {{ settings.header_font | remove('Google+') | replace({'+': ' '}) }};
-  font-weight: 300;
   margin-top: 40px;
   text-transform: uppercase;
 }
@@ -569,7 +553,6 @@ ul.category li a {
 
 .cart__resume-table {}
 .cart__resume-table th {
-  font-weight: 300;
   color: {{ settings.title_color }};
   text-transform: uppercase;
 }
@@ -600,7 +583,6 @@ select.cart__resume-table__product-quantity {
 .cart__resume-table__product-amount {
   text-align: right;
   padding-top: 18px !important;
-  font-weight: 300;
 }
 
 .cart__resume-table__product-remove {
@@ -616,6 +598,38 @@ select.cart__resume-table__product-quantity {
   border-bottom: 1px solid {{ settings.border_color }};
   margin-bottom: 20px;
   padding: 15px 20px;
+}
+
+a.btn.btn-share.share-facebook {
+  background-color: #3b5998;
+}
+
+a.btn.btn-share.share-facebook:hover {
+  background-color: #2d4373;
+}
+
+a.btn.btn-share.share-twitter {
+  background-color: #00aced;
+}
+
+a.btn.btn-share.share-twitter:hover {
+  background-color: #0087ba;
+}
+
+a.btn.btn-share.share-pinterest {
+  background-color: #cb2027;
+}
+
+a.btn.btn-share.share-pinterest:hover {
+  background-color: #9f191f;
+}
+
+a.btn.btn-share.share-google {
+  background-color: #dd4b39;
+}
+
+a.btn.btn-share.share-google:hover {
+  background-color: #c23321;
 }
 
 /* Slider */
