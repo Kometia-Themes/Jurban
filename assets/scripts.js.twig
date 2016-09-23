@@ -32,4 +32,21 @@ $(document).ready(function() {
       return false;
     });
  }
+
+ $('.toggle-menu').on('click', function(e){
+   e.preventDefault();
+   $('.menu-list').stop().slideToggle();
+    e.stopPropagation();
+ });
+
+ $('html').on('click', function(){
+   if($('.extra').is(':visible')){
+    $('.menu-list').stop().slideUp();
+   }
+ });
+
+ $('.menu-list').on('click', function(e){
+   e.stopPropagation();
+ });
+
 });

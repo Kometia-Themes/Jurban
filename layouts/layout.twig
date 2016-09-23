@@ -47,54 +47,7 @@
 
 <body role="document">
   <div class="header">
-    <div class="header__bar">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-4">
-            {% if settings.display_search %}
-            <a class="header__bar__link" href="/buscar">
-              <i class="mdi mdi-magnify"></i>
-              Buscar
-            </a>
-            {% endif %}
-          </div>
-          <div class="col-sm-4 text-center">
-            {% if settings.display_message_bar %}
-              <span class="header__bar__message">{{ settings.message_bar }}</span>
-            {% endif %}
-          </div>
-          <div class="col-sm-4 text-right">
-            <ul class="list-inline">
-              {% if store.customer_accounts_enabled_or_optional %}
-                {% if customer %}
-                <li>
-                  <a href="/cuenta" class="header__bar__link">
-                    <i class="mdi mdi-lock"></i> Cuenta
-                  </a>
-                </li>
-                {% else %}
-                <li>
-                  <a href="/cuenta/login" class="header__bar__link">
-                    <i class="mdi mdi-lock"></i> Ingresar
-                  </a>
-                </li>
-                <li>
-                  <a href="/cuenta/registro" class="header__bar__link">
-                    <i class="mdi mdi-account"></i> Crear cuenta
-                  </a>
-                </li>
-                {% endif %}
-              {% endif %}
-              <li>
-                <a href="/carrito" class="header__bar__link">
-                  <i class="mdi mdi-cart"><sup>{{ cart.total_items }}</sup></i> Carrito
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+  {% include "_nav-top.twig" %}
     <div class="header__logo">
       <div class="container">
         <div class="row">
@@ -109,34 +62,7 @@
         </div>
       </div>
     </div>
-    <div class="main-menu">
-      <ul class="list-inline text-center">
-        {% for link in menus.main %}
-          {% if link.children | length >= 1 %}
-          <li class="dropdown">
-            <a class="text-uppercase" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              {{ link.name }} <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              {% for children in link.children %}
-              <li>
-                <a class="text-uppercase" href="{{ children.url }}">
-                  {{ children.name }}
-                </a>
-              </li>
-              {% endfor %}
-            </ul>
-          </li>
-          {% else %}
-          <li>
-            <a class="text-uppercase" href="{{ link.url }}">
-              {{ link.name }}
-            </a>
-          </li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    </div>
+    {% include "_nav.twig" %}
   </div>
 
   <div class="container body-container">
