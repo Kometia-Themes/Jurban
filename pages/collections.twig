@@ -7,7 +7,7 @@
   </div>
 </div>
 
-{% if collections.count == 0 %}
+{% if collections | length == 0 %}
 
   {% include '_collections-placeholder.twig' %}
 
