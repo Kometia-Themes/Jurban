@@ -47,11 +47,10 @@
 
 <body role="document">
   <div class="header">
-  {% include "_nav-top.twig" %}
+    {% include "_nav-top.twig" %}
     <div class="header__logo">
       <div class="container">
         <div class="row">
-          {# TITLE #}
           <div class="col-sm-12 text-center">
             {% if settings.use_logo %}
             <h1 class="header__title"><a href="/"><img class="img-responsive" src="{{ settings['logo.png'] }}" alt="{{ store.name }}"></a></h1>

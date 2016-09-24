@@ -37,15 +37,20 @@ a {
   color: {{ settings.link_color }};
 }
 
-a:focus,
-a:hover {
-  text-decoration: none;
+a:focus {
+  outline: none;
+  outline-offset: 0;
 }
 
 a:hover {
   color: {{ settings.link_color }};
   opacity: 0.7;
   -webkit-backface-visibility: hidden;
+}
+
+a:focus,
+a:hover {
+  text-decoration: none;
 }
 
 a.active {
@@ -442,7 +447,7 @@ input.checkbox-control__input[type="checkbox"]:disabled + label::before {
   border-bottom: 1px solid {{ settings.border_color }};
 }
 
-.main-menu > ul > li > a {
+.main-menu a {
   color: {{ settings.nav_link_color }};
 }
 
@@ -467,7 +472,6 @@ input.checkbox-control__input[type="checkbox"]:disabled + label::before {
   margin: 0px;
   padding: 0px;
   width: 100%;
-  padding: 10px 0;
 }
 
 .main-menu ul li {
@@ -487,14 +491,7 @@ input.checkbox-control__input[type="checkbox"]:disabled + label::before {
 .main-menu ul li span {
   display: block;
   padding: 10px;
-}
-
-.main-menu ul li.submenu:before {
-  content: "\f140";
-  font: normal normal normal 18px/1 "Material Design Icons";
-  position: absolute;
-  right: 0px;
-  top: 10px;
+  text-align: left;
 }
 
 .main-menu ul li.submenu a {
@@ -544,16 +541,22 @@ input.checkbox-control__input[type="checkbox"]:disabled + label::before {
 
 .main-menu ul li > ul {
   display: none;
-  left: 0px;
-  min-width: 100%;
+  left: 100%;
+  min-width: 160px;
   position: absolute;
   top: 100%;
+  margin-top: -10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 1px 4px rgba(0,0,0,.175);
+}
+
+.main-menu_dropdown > ul {
+  left: 0 !important;
+  margin-top: -1px !important;
 }
 
 .main-menu ul li > ul li {
   background: #fff;
-  border: solid 1px #ddd;
-  border-top: none;
   display: block;
 }
 
@@ -561,8 +564,22 @@ input.checkbox-control__input[type="checkbox"]:disabled + label::before {
   font-weight: bold;
 }
 
-.main-menu .extra {
+.main-menu .main-menu--extra {
   display: none;
+}
+
+.menu-list {
+  padding: 8px 0 !important;
+}
+
+.main-menu__submenu {
+    position: relative;
+}
+
+.main-menu__submenu .main-menu__menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
 }
 
 @media screen and (min-width: 992px) {
@@ -609,10 +626,6 @@ input.checkbox-control__input[type="checkbox"]:disabled + label::before {
     padding-left: 20px;
   }
 
-  .main-menu > ul li.submenu:before {
-    right: 20px;
-  }
-
   .main-menu > ul li > ul {
     height: auto;
     left: 0px;
@@ -639,7 +652,7 @@ input.checkbox-control__input[type="checkbox"]:disabled + label::before {
     border-bottom: none;
   }
 
-  .main-menu .extra {
+  .main-menu .main-menu--extra {
     display: block;
   }
 }

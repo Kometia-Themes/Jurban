@@ -49,11 +49,9 @@ $(document).ready(function() {
     e.stopPropagation();
   });
 
-  $('.menu-list a').on('click', function(e) {
-    $('.menu-list li > ul').stop().slideUp('fast');
-    if( $(this).attr('href') == '#' ) {
-      e.preventDefault();
-      $(this).next('ul').stop().slideToggle('fast');
-    }
+  $('.menu-list a.multi').on("click", function(e){
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
   });
 });
