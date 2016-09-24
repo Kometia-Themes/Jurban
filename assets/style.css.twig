@@ -118,168 +118,6 @@ button {
   -webkit-transition: all 0.5s ease, outline 0.000001s;
   transition: all 0.5s ease, outline 0.000001s;
 }
-.header__bar .search {
-  position: relative;
-}
-.header__bar .search button {
-  background: transparent;
-  border: none;
-  font-size: 20px;
-  left: 10px;
-  margin: 0px;
-  padding: 0px;
-  top: 10px;
-  moz-transition: all 0.5s ease, outline 0s;
-  webkit-transition: all 0.5s ease, outline 0s;
-  -webkit-transition: all 0.5s ease, outline 0.000001s;
-  transition: all 0.5s ease, outline 0.000001s;
-  position: absolute;
-  width: auto;
-}
-.header__bar .search button:hover {
-  color: #d4d4d4;
-}
-.header__bar .search input {
-  background: transparent;
-  border: 1px solid transparent;
-  color: #fff;
-  max-width: 100px;
-  padding: 8px 5px 8px 32px;
-  moz-transition: all 0.5s ease, outline 0s;
-  webkit-transition: all 0.5s ease, outline 0s;
-  -webkit-transition: all 0.5s ease, outline 0.000001s;
-  transition: all 0.5s ease, outline 0.000001s;
-  width: 100%;
-}
-.header__bar .search input::-webkit-input-placeholder {
-  color: #fff;
-}
-.header__bar .search input:-moz-placeholder {
-  color: #fff;
-}
-.header__bar .search input::-moz-placeholder {
-  color: #fff;
-}
-.header__bar .search input:-ms-input-placeholder {
-  color: #fff;
-}
-.header__bar .search input:focus {
-  background: #fff;
-  border: 1px solid #ddd;
-  box-shadow: none !important;
-  color: #555;
-  max-width: 220px;
-  outline: none !important;
-}
-.header__bar .search input:focus + button {
-  color: #555;
-}
-.header__bar .head-options li {
-  padding: 10px 5px;
-}
-.main-menu {
-  text-align: center;
-}
-.main-menu .mobile a {
-  display: inline-block;
-  font-size: 18px;
-  padding: 10px;
-}
-.main-menu .mobile a.toggle-menu {
-  font-size: 30px;
-}
-.main-menu ul {
-  margin: 0px;
-  padding: 0px;
-  width: 100%;
-}
-.main-menu ul li {
-  list-style: none;
-  display: inline-block;
-  margin: 0px;
-  padding: 0px;
-  text-transform: uppercase;
-  moz-transition: all 0.5s ease, outline 0s;
-  webkit-transition: all 0.5s ease, outline 0s;
-  -webkit-transition: all 0.5s ease, outline 0.000001s;
-  transition: all 0.5s ease, outline 0.000001s;
-}
-.main-menu ul li a,
-.main-menu ul li span {
-  display: block;
-  padding: 10px;
-}
-.main-menu ul li .search {
-  position: relative;
-}
-.main-menu ul li .search button {
-  background: transparent;
-  border: none;
-  color: #aaa;
-  font-size: 20px;
-  left: 10px;
-  margin: 0px;
-  padding: 0px;
-  top: 10px;
-  moz-transition: all 0.5s ease, outline 0s;
-  webkit-transition: all 0.5s ease, outline 0s;
-  -webkit-transition: all 0.5s ease, outline 0.000001s;
-  transition: all 0.5s ease, outline 0.000001s;
-  position: absolute;
-  width: auto;
-}
-.main-menu ul li .search input {
-  border: none;
-  padding: 8px 5px 8px 32px;
-  moz-transition: all 0.5s ease, outline 0s;
-  webkit-transition: all 0.5s ease, outline 0s;
-  -webkit-transition: all 0.5s ease, outline 0.000001s;
-  transition: all 0.5s ease, outline 0.000001s;
-  width: 100%;
-}
-.main-menu ul li .search input:focus {
-  border: none;
-  box-shadow: none !important;
-  outline: none !important;
-}
-.main-menu ul li .search input:focus + button {
-  color: #555;
-}
-.main-menu .extra {
-  display: none;
-}
-@media screen and (min-width: 992px) {
-  .main-menu > ul {
-    display: block !important;
-    height: auto !important;
-  }
-}
-@media screen and (max-width: 991px) {
-  .main-menu {
-    text-align: left;
-  }
-  .main-menu > ul {
-    display: none;
-  }
-  .main-menu > ul li {
-    border-bottom: solid 1px #ddd;
-    border-left: solid 0px #ddd;
-    display: block;
-  }
-  .main-menu > ul li:last-of-type {
-    border-bottom: none;
-  }
-  .main-menu > ul li:hover {
-    border-left: solid 10px #ddd;
-  }
-  .main-menu > ul li:hover a,
-  .main-menu > ul li:hover span {
-    padding-left: 20px;
-  }
-  .main-menu .extra {
-    display: block;
-  }
-}
 
 .breadcrumb {
   padding: 8px 0;
@@ -523,12 +361,84 @@ input.checkbox-control__input[type="checkbox"]:disabled + label::before {
   text-decoration: none;
 }
 
+.header__bar .search {
+  position: relative;
+}
+
+.header__bar .search button {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  left: 10px;
+  margin: 0px;
+  padding: 0px;
+  top: 10px;
+  moz-transition: all 0.5s ease, outline 0s;
+  webkit-transition: all 0.5s ease, outline 0s;
+  -webkit-transition: all 0.5s ease, outline 0.000001s;
+  transition: all 0.5s ease, outline 0.000001s;
+  position: absolute;
+  width: auto;
+}
+
+.header__bar .search button:hover {
+  color: #d4d4d4;
+}
+
+.header__bar .search input {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #fff;
+  max-width: 100px;
+  padding: 8px 5px 8px 32px;
+  moz-transition: all 0.5s ease, outline 0s;
+  webkit-transition: all 0.5s ease, outline 0s;
+  -webkit-transition: all 0.5s ease, outline 0.000001s;
+  transition: all 0.5s ease, outline 0.000001s;
+  width: 100%;
+}
+
+.header__bar .search input::-webkit-input-placeholder {
+  color: #fff;
+}
+
+.header__bar .search input:-moz-placeholder {
+  color: #fff;
+}
+
+.header__bar .search input::-moz-placeholder {
+  color: #fff;
+}
+
+.header__bar .search input:-ms-input-placeholder {
+  color: #fff;
+}
+
+.header__bar .search input:focus {
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: none !important;
+  color: #555;
+  max-width: 220px;
+  outline: none !important;
+}
+
+.header__bar .search input:focus + button {
+  color: #555;
+}
+
+.header__bar .head-options li {
+  padding: 10px 5px;
+}
+
 .main-menu {
   background:{{ settings.menu_bg_color }};
+  position: relative;
+  text-align: center;
+  z-index: 9999;
 }
 
 .main-menu > ul {
-  padding: 20px 0 15px;
   border-bottom: 1px solid {{ settings.border_color }};
 }
 
@@ -541,6 +451,197 @@ input.checkbox-control__input[type="checkbox"]:disabled + label::before {
   opacity: 0.7;
   text-decoration: none;
   -webkit-backface-visibility: hidden;
+}
+
+.main-menu .mobile a {
+  display: inline-block;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.main-menu .mobile a.toggle-menu {
+  font-size: 30px;
+}
+
+.main-menu ul {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.main-menu ul li {
+  list-style: none;
+  display: inline-block;
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+  text-transform: uppercase;
+  moz-transition: all 0.5s ease, outline 0s;
+  webkit-transition: all 0.5s ease, outline 0s;
+  -webkit-transition: all 0.5s ease, outline 0.000001s;
+  transition: all 0.5s ease, outline 0.000001s;
+}
+
+.main-menu ul li a,
+.main-menu ul li span {
+  display: block;
+  padding: 10px;
+}
+
+.main-menu ul li.submenu:before {
+  content: "\f140";
+  font: normal normal normal 18px/1 "Material Design Icons";
+  position: absolute;
+  right: 0px;
+  top: 10px;
+}
+
+.main-menu ul li.submenu a {
+  padding-right: 20px;
+}
+
+.main-menu ul li .search {
+  position: relative;
+}
+
+.main-menu ul li .search button {
+  background: transparent;
+  border: none;
+  color: #aaa;
+  font-size: 20px;
+  left: 10px;
+  margin: 0px;
+  padding: 0px;
+  top: 10px;
+  moz-transition: all 0.5s ease, outline 0s;
+  webkit-transition: all 0.5s ease, outline 0s;
+  -webkit-transition: all 0.5s ease, outline 0.000001s;
+  transition: all 0.5s ease, outline 0.000001s;
+  position: absolute;
+  width: auto;
+}
+
+.main-menu ul li .search input {
+  border: none;
+  padding: 8px 5px 8px 32px;
+  moz-transition: all 0.5s ease, outline 0s;
+  webkit-transition: all 0.5s ease, outline 0s;
+  -webkit-transition: all 0.5s ease, outline 0.000001s;
+  transition: all 0.5s ease, outline 0.000001s;
+  width: 100%;
+}
+
+.main-menu ul li .search input:focus {
+  border: none;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.main-menu ul li .search input:focus + button {
+  color: #555;
+}
+
+.main-menu ul li > ul {
+  display: none;
+  left: 0px;
+  min-width: 100%;
+  position: absolute;
+  top: 100%;
+}
+
+.main-menu ul li > ul li {
+  background: #fff;
+  border: solid 1px #ddd;
+  border-top: none;
+  display: block;
+}
+
+.main-menu ul > li.active a {
+  font-weight: bold;
+}
+
+.main-menu .extra {
+  display: none;
+}
+
+@media screen and (min-width: 992px) {
+  .main-menu > ul {
+    display: block !important;
+    height: auto !important;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .main-menu {
+    text-align: left;
+  }
+
+  .main-menu > ul {
+    display: none;
+  }
+
+  .main-menu > ul li {
+    border-bottom: solid 1px #ddd;
+    border-left: solid 0px #ddd;
+    display: block;
+  }
+
+  .main-menu > ul li:last-of-type {
+    border-bottom: none;
+  }
+
+  .main-menu > ul li:hover,
+  .main-menu > ul li.active {
+    border-left: solid 10px #ddd;
+    border-bottom: solid 1px #ddd;
+  }
+
+  .main-menu > ul li:hover:last-of-type,
+  .main-menu > ul li.active:last-of-type {
+    border-bottom: none;
+  }
+
+  .main-menu > ul li:hover a,
+  .main-menu > ul li.active a,
+  .main-menu > ul li:hover span,
+  .main-menu > ul li.active span {
+    padding-left: 20px;
+  }
+
+  .main-menu > ul li.submenu:before {
+    right: 20px;
+  }
+
+  .main-menu > ul li > ul {
+    height: auto;
+    left: 0px;
+    position: relative;
+    top: 0;
+    width: 100%;
+    padding: 0;
+  }
+
+  .main-menu > ul li > ul li {
+    border: none;
+    border-bottom: solid 1px #ddd;
+    border-left: solid 0px #ddd;
+    box-shadow: none;
+    height: auto;
+    margin: 0px;
+  }
+
+  .main-menu > ul li > ul li:first-of-type {
+    border-top: solid 1px #ddd;
+  }
+
+  .main-menu > ul li > ul li:last-of-type {
+    border-bottom: none;
+  }
+
+  .main-menu .extra {
+    display: block;
+  }
 }
 
 .footer {

@@ -31,22 +31,29 @@ $(document).ready(function() {
       {% endif %}
       return false;
     });
- }
+  }
 
- $('.toggle-menu').on('click', function(e){
-   e.preventDefault();
-   $('.menu-list').stop().slideToggle();
+  $('.toggle-menu').on('click', function(e) {
+    e.preventDefault();
+    $('.menu-list').stop().slideToggle();
     e.stopPropagation();
- });
+  });
 
- $('html').on('click', function(){
-   if($('.extra').is(':visible')){
-    $('.menu-list').stop().slideUp();
-   }
- });
+  $('html').on('click', function() {
+    if ($('.extra').is(':visible')) {
+      $('.menu-list').stop().slideUp();
+    }
+  });
 
- $('.menu-list').on('click', function(e){
-   e.stopPropagation();
- });
+  $('.menu-list').on('click', function(e) {
+    e.stopPropagation();
+  });
 
+  $('.menu-list a').on('click', function(e) {
+    $('.menu-list li > ul').stop().slideUp('fast');
+    if( $(this).attr('href') == '#' ) {
+      e.preventDefault();
+      $(this).next('ul').stop().slideToggle('fast');
+    }
+  });
 });

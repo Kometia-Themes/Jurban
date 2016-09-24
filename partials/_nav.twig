@@ -46,9 +46,9 @@
 
     {% for link in menus.main %}
       {% if link.children | length >= 1 %}
-        <li>
+        <li class="submenu">
           <a href="#">
-            {{ link.name }} <span class="caret"></span>
+            {{ link.name }}
           </a>
           <ul>
             {% for children in link.children %}

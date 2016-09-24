@@ -18,7 +18,7 @@
     <a href="/productos/{{ product.permalink }}">
       <h4 class="product-card__name">{{ product.name }}</h4>
       <span class="product-card__price">
-        {% if product.compared_price is defined %}
+        {% if product.compared_price is defined and product.compared_price > 0 %}
           <del>{{ product.compared_price | money('symbol', 'code') }}</del>
         {% endif %}
         {{ product.price | money('symbol', 'code') }}
