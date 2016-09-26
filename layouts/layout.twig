@@ -161,7 +161,7 @@
       </div>
     </div>
 
-    {% if settings.accept_visa or settings.accept_mastercard or settings.accept_amex %}
+    {% if settings.accept_visa or settings.accept_mastercard or settings.accept_amex or settings.accept_paypal or settings.accept_oxxo or settings.accept_cash %}
     <div class="row text-center">
       <div class="col-sm-12">
         <ul class="list-inline footer__payment-methods">
@@ -173,6 +173,15 @@
           {% endif %}
           {% if settings.accept_amex %}
           <li><img src="{{ 'amex.png' | payment_img_url }}" alt="American Express"></li>
+          {% endif %}
+          {% if settings.accept_paypal %}
+          <li><img src="{{ 'paypal.png' | payment_img_url }}" alt="PayPal"></li>
+          {% endif %}
+          {% if settings.accept_oxxo %}
+          <li><img src="{{ 'oxxo.png' | payment_img_url }}" alt="OXXO"></li>
+          {% endif %}
+          {% if settings.accept_cash %}
+          <li><img src="{{ 'cash.png' | payment_img_url }}" alt="Efectivo"></li>
           {% endif %}
         </ul>
       </div>

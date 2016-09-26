@@ -439,6 +439,18 @@
         "type": "checkbox",
         "id": "accept_amex",
         "label": "American Express"
+      }, {
+        "type": "checkbox",
+        "id": "accept_paypal",
+        "label": "PayPal"
+      }, {
+        "type": "checkbox",
+        "id": "accept_oxxo",
+        "label": "OXXO"
+      }, {
+        "type": "checkbox",
+        "id": "accept_cash",
+        "label": "Efectivo"
       }]
     }]
   }, {
