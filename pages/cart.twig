@@ -30,7 +30,13 @@
         {% for item in cart.items %}
         <tr>
           <td class="hidden-xs" align="center">
-            <img class="img-responsive" src="{{ item.sku.image.url }}?w=100" width="100" alt="{{ item.sku.full_name }}">
+            {% if item.sku.image_url is not empty %}
+            <img class="img-responsive" src="{{ item.sku.image_url }}?w=100" width="100" alt="{{ item.sku.full_name }}">
+            {% elseif item.product.image_url is not empty %}
+            <img class="img-responsive" src="{{ item.product.image_url }}?w=100" width="100" alt="{{ item.sku.full_name }}">
+            {% else %}
+            <img class="img-responsive" src="{{ 'placeholders/product-11.jpg' | global_img_url }}" width="100" alt="{{ item.sku.full_name }}">
+            {% endif %}
           </td>
           <td>
             <a class="cart__resume-table__product-name" href="/productos/{{ item.product.permalink }}">{{ item.sku.full_name }}</a>
