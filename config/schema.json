@@ -470,7 +470,7 @@
           "value": "none",
           "label": "Ningúno"
         }, {
-          "value": "slider",
+          "value": "featured-slider",
           "label": "Slider"
         }, {
           "value": "featured-collection",
