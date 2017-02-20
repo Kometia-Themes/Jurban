@@ -120,28 +120,28 @@
         <div class="col-sm-{{ 12 / footer_cols }}">
           <h4 class="footer__category">Síguenos</h4>
           <ul class="list-inline footer__payment-methods">
-            {% if settings.twitter_link is not empty %}
+            {% if settings.twitter_link is not empty and settings.twitter_link_show %}
             <li><a href="{{ settings.twitter_link }}" target="_blank"><i class="mdi mdi-24px mdi-twitter"></i></a></li>
             {% endif %}
-            {% if settings.facebook_link is not empty %}
+            {% if settings.facebook_link is not empty and settings.facebook_link_show %}
             <li><a href="{{ settings.facebook_link }}" target="_blank"><i class="mdi mdi-24px mdi-facebook"></i></a></li>
             {% endif %}
-            {% if settings.google_link is not empty %}
+            {% if settings.google_link is not empty and settings.google_link_show %}
             <li><a href="{{ settings.google_link }}" target="_blank"><i class="mdi mdi-24px mdi-google-plus"></i></a></li>
             {% endif %}
-            {% if settings.youtube_link is not empty %}
+            {% if settings.youtube_link is not empty and settings.youtube_link_show %}
             <li><a href="{{ settings.youtube_link }}" target="_blank"><i class="mdi mdi-24px mdi-youtube-play"></i></a></li>
             {% endif %}
-            {% if settings.vimeo_link is not empty %}
+            {% if settings.vimeo_link is not empty and settings.vimeo_link_show %}
             <li><a href="{{ settings.vimeo_link }}" target="_blank"><i class="mdi mdi-24px mdi-vimeo"></i></a></li>
             {% endif %}
-            {% if settings.pinterest_link is not empty %}
+            {% if settings.pinterest_link is not empty and settings.pinterest_link_show %}
             <li><a href="{{ settings.pinterest_link }}" target="_blank"><i class="mdi mdi-24px mdi-pinterest"></i></a></li>
             {% endif %}
-            {% if settings.instagram_link is not empty %}
+            {% if settings.instagram_link is not empty and settings.instagram_link_show %}
             <li><a href="{{ settings.instagram_link }}" target="_blank"><i class="mdi mdi-24px mdi-instagram"></i></a></li>
             {% endif %}
-            {% if settings.tumblr_link is not empty %}
+            {% if settings.tumblr_link is not empty and settings.tumblr_link_show %}
             <li><a href="{{ settings.tumblr_link }}" target="_blank"><i class="mdi mdi-24px mdi-tumblr"></i></a></li>
             {% endif %}
           </ul>

@@ -664,40 +664,72 @@
     "sections": [{
       "header": "Cuentas",
       "settings": [{
+      "type": "checkbox",
+      "id": "twitter_link_show",
+      "label": "Mostrar Twitter"
+      }, {
         "type": "text",
         "id": "twitter_link",
         "label": "Twitter",
         "info": "https:\/\/twitter.com\/shoperti"
+      }, {
+        "type": "checkbox",
+        "id": "facebook_link_show",
+        "label": "Mostrar Facebook"
       }, {
         "type": "text",
         "id": "facebook_link",
         "label": "Facebook",
         "info": "https:\/\/www.facebook.com\/shoperti"
       }, {
+        "type": "checkbox",
+        "id": "google_link_show",
+        "label": "Mostrar Google+"
+      }, {
         "type": "text",
         "id": "google_link",
         "label": "Google+",
         "info": "https:\/\/plus.google.com\/+shoperti"
+      }, {
+        "type": "checkbox",
+        "id": "youtube_link_show",
+        "label": "Mostrar Youtube"
       }, {
         "type": "text",
         "id": "youtube_link",
         "label": "Youtube",
         "info": "https:\/\/www.youtube.com\/user\/shoperti"
       }, {
+        "type": "checkbox",
+        "id": "vimeo_link_show",
+        "label": "Mostrar Vimeo"
+      }, {
         "type": "text",
         "id": "vimeo_link",
         "label": "Vimeo",
         "info": "https:\/\/vimeo.com\/shoperti"
+      }, {
+        "type": "checkbox",
+        "id": "pinterest_link_show",
+        "label": "Mostrar Pinterest"
       }, {
         "type": "text",
         "id": "pinterest_link",
         "label": "Pinterest",
         "info": "https:\/\/www.pinterest.com\/shoperti\/"
       }, {
+        "type": "checkbox",
+        "id": "instagram_link_show",
+        "label": "Mostrar Instagram"
+      }, {
         "type": "text",
         "id": "instagram_link",
         "label": "Instagram",
         "info": "https:\/\/instagram.com\/shoperti\/"
+      }, {
+        "type": "checkbox",
+        "id": "tumblr_link_show",
+        "label": "Mostrar Tumblr"
       }, {
         "type": "text",
         "id": "tumblr_link",
