@@ -51,7 +51,7 @@
     {% if not product.is_in_stock %}<span class="label label-danger">Agotado</span>{% endif %}
 
     <div class="product-single__price" id="js-price-preview">
-      <del>{{ product.compared_price is defined ? product.compared_price | money('symbol', 'code') : '' }}</del>
+      <del>{{ product.compared_price > product.price ? product.compared_price | money('symbol', 'code') : '' }}</del>
       {{ product.price | money('symbol', 'code') }}
     </div>
 
