@@ -14,9 +14,9 @@ $(document).ready(function() {
   }
 
   {% if settings.enable_product_image_zoom %}
-  if ($('#zoom').size() > 0) {
-    $("#zoom").elevateZoom({ responsive: true, cursor: 'pointer' });
-  }
+    if ($('#zoom').size() > 0 && $(window).width() > 767) {
+      $("#zoom").elevateZoom({ responsive: true, cursor: 'pointer' });
+    }
   {% endif %}
 
   if ($('.product__carousel div').size() > 0) {
